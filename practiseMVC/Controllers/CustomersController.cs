@@ -71,5 +71,15 @@ namespace practiseMVC.Controllers
             }
             return View("Edit", model);
         }
+
+        public ActionResult Delete(string id)
+        {
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/Customers/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Index");
+        }
     }
 }
