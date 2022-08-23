@@ -85,10 +85,21 @@
                 @Html.DisplayFor(modelItem => item.Fax)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit",  new { id=item.CustomerId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.CustomerId  })
+                    <button class="btn btn-light" style="width: 70px">@Html.ActionLink("編輯", "Edit", new { id=item.CustomerId }) </button>
+                    <button class="btn btn-danger" id="delete" style="width: 70px">@Html.ActionLink("刪除", "Delete", new { id=item.CustomerId }) </button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+@section styles{
+    <style>
+        thead{
+            background-color:antiquewhite
+        }
+
+        .table tr:nth-child(even) {
+            background: #CCC
+        }
+    </style>
+}
