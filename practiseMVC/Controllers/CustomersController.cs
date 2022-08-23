@@ -45,5 +45,31 @@ namespace practiseMVC.Controllers
             }
             return View();
         }
+
+        public ActionResult Edit(string id)
+        {
+
+            Models.MVCCustomersModel model = new Models.MVCCustomersModel();
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Customers/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                model = JsonConvert.DeserializeObject<Models.MVCCustomersModel>(data);
+            }
+            return View("Edit", model);
+        }
+        [HttpPost]
+        public ActionResult Edit(Models.MVCCustomersModel model)
+        {
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/Customers/" + model.CustomerId, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Edit", model);
+        }
     }
 }
