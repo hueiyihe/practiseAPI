@@ -6,7 +6,6 @@ namespace practiseMVC.Controllers
 {
     public class CustomersController : Controller
     {
-        //Uri baseAddress = new Uri("https://localhost:7037/api");
         private static readonly HttpClient client;
         static CustomersController()
         {
